@@ -127,6 +127,29 @@ function animalSvg(id) {
     <ellipse cx="${cx}" cy="${cy + 6.5}" rx="2.4" ry="1.7" fill="${ink}"/>
     <path d="M${cx - 3.2} ${cy + 10.5} q3.2 3.8 6.4 0" fill="none" stroke="${ink}" stroke-width="1.7" stroke-linecap="round"/>`;
 
+  const arms = {
+    panda: "",
+    penguin: "",
+    frog: `
+      <ellipse cx="13" cy="69" rx="7" ry="12" transform="rotate(28 13 69)" fill="${c.body}" stroke="${ink}" stroke-width="2"/>
+      <ellipse cx="59" cy="69" rx="7" ry="12" transform="rotate(-28 59 69)" fill="${c.body}" stroke="${ink}" stroke-width="2"/>`,
+    flamingo: `
+      <path d="M27 45 q-13 8 -8 24 q10 -4 15 -14" fill="${c.body}" stroke="${ink}" stroke-width="2.2"/>
+      <path d="M49 45 q13 8 8 24 q-10 -4 -15 -14" fill="${c.body}" stroke="${ink}" stroke-width="2.2"/>`,
+    otter: `
+      <ellipse cx="12" cy="67" rx="7" ry="12" transform="rotate(30 12 67)" fill="${c.body}" stroke="${ink}" stroke-width="2"/>
+      <ellipse cx="52" cy="67" rx="7" ry="12" transform="rotate(-30 52 67)" fill="${c.body}" stroke="${ink}" stroke-width="2"/>`,
+    squirrel: `
+      <ellipse cx="14" cy="68" rx="6" ry="11" transform="rotate(28 14 68)" fill="${c.body}" stroke="${ink}" stroke-width="2"/>
+      <ellipse cx="48" cy="68" rx="6" ry="11" transform="rotate(-28 48 68)" fill="${c.body}" stroke="${ink}" stroke-width="2"/>`,
+    hedgehog: `
+      <ellipse cx="18" cy="72" rx="6" ry="9" transform="rotate(35 18 72)" fill="${c.body}" stroke="${ink}" stroke-width="2"/>
+      <ellipse cx="52" cy="72" rx="6" ry="9" transform="rotate(-35 52 72)" fill="${c.body}" stroke="${ink}" stroke-width="2"/>`,
+    default: `
+      <ellipse cx="15" cy="67" rx="7" ry="12" transform="rotate(28 15 67)" fill="${c.body}" stroke="${ink}" stroke-width="2"/>
+      <ellipse cx="57" cy="67" rx="7" ry="12" transform="rotate(-28 57 67)" fill="${c.body}" stroke="${ink}" stroke-width="2"/>`,
+  };
+
   const bodies = {
     fox: `
       <ellipse cx="22" cy="86" rx="8" ry="6" fill="${c.body}" stroke="${ink}" stroke-width="2"/>
@@ -259,7 +282,7 @@ function animalSvg(id) {
       <ellipse cx="16" cy="46" rx="3.2" ry="2.2" fill="${c.ear}"/>`,
   };
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 96" aria-hidden="true">${bodies[id] || bodies.fox}</svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 96" aria-hidden="true">${arms[id] ?? arms.default}${bodies[id] || bodies.fox}</svg>`;
 }
 
 function pickHatchAnimal(egg) {
