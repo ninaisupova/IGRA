@@ -32,15 +32,29 @@
         <div class="pet-nameplate" id="pet-label" hidden></div>
 
         <div class="room" id="room">
+          <div class="forest-view" id="window-glass">
+            <div class="jungle-sky"></div>
+            <div class="canopy"></div>
+            <div class="tree-line">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <div class="undergrowth"></div>
+            <div class="jungle-mist"></div>
+            <div class="stars-sky" id="stars-sky"></div>
+            <div class="rain" id="rain"></div>
+            <div class="bird" id="bird"></div>
+          </div>
+
+          <div class="window-panorama" aria-hidden="true">
+            <div class="window-sash"></div>
+            <div class="glass-sheen"></div>
+            <div class="vines"><i></i><i></i><i></i><i></i></div>
+          </div>
+
           <div class="ceiling"></div>
           <div class="wall" id="wall"></div>
           <div class="floor"></div>
           <div class="floor-shadow"></div>
-
-          <div class="kitchen-tiles" aria-hidden="true"></div>
-          <div class="kitchen-floor" aria-hidden="true"></div>
-          <div class="bedroom-wall" aria-hidden="true"></div>
-          <div class="arch" aria-hidden="true"></div>
 
           <div class="room-stage">
             <div class="fridge" aria-hidden="true">
@@ -63,33 +77,27 @@
               <i></i><i></i>
             </div>
 
-            <div class="window-frame">
-              <div class="window-glass" id="window-glass">
-                <div class="street" aria-hidden="true">
-                  <div class="street-sky">
-                    <div class="street-sun"></div>
-                    <div class="street-moon"></div>
-                    <div class="stars-sky" id="stars-sky"></div>
-                    <div class="street-cloud"></div>
-                  </div>
-                  <div class="building b1"><i></i><i></i><i></i><i></i></div>
-                  <div class="building b2"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-                  <div class="building b3"><i></i><i></i><i></i><i></i></div>
-                  <div class="street-tree"></div>
-                  <div class="street-road"></div>
-                </div>
-                <div class="rain" id="rain"></div>
-                <div class="bird" id="bird"></div>
-                <div class="window-sash"></div>
-              </div>
+            <div class="scene-plant plant-left" aria-hidden="true">
+              <span class="frond f1"></span>
+              <span class="frond f2"></span>
+              <span class="frond f3"></span>
+              <span class="pot"></span>
+            </div>
+            <div class="scene-plant plant-right" aria-hidden="true">
+              <span class="frond f1"></span>
+              <span class="frond f2"></span>
+              <span class="frond f3"></span>
+              <span class="pot"></span>
             </div>
 
           <div class="poster" id="furn-poster" hidden>
             <div class="poster-art"></div>
           </div>
           <div class="lamp" id="furn-lamp" hidden>
-            <div class="lamp-shade"></div>
-            <div class="lamp-pole"></div>
+            <div class="lamp-arc"></div>
+            <div class="lamp-bowl b1"></div>
+            <div class="lamp-bowl b2"></div>
+            <div class="lamp-stem"></div>
             <div class="lamp-base"></div>
           </div>
           <div class="curtains" id="furn-curtains" hidden>
@@ -114,9 +122,12 @@
           </div>
 
           <div class="bed" id="bed" data-interact="bed" title="Кроватка">
-            <div class="bed-legs"></div>
+            <div class="headboard"></div>
+            <div class="nightstand">
+              <div class="orb-lamp"></div>
+            </div>
+            <div class="duvet"></div>
             <div class="pillow"></div>
-            <div class="blanket"></div>
           </div>
           <div class="bowl" id="bowl" data-interact="bowl" title="Мисочка">
             <div class="bowl-food" id="bowl-food"></div>
