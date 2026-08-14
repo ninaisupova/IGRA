@@ -100,115 +100,166 @@ const FOODS = [
 ];
 
 const SHOP = [
-  { id: "rug", name: "Коврик", emoji: "🧶", price: 18, hint: "мягко сидеть" },
-  { id: "plant", name: "Растение", emoji: "🌿", price: 24, hint: "зелёный уголок" },
-  { id: "poster", name: "Постер", emoji: "🖼", price: 16, hint: "украшение стены" },
-  { id: "cushion", name: "Подушка", emoji: "🛋", price: 20, hint: "для дневного сна" },
-  { id: "toys", name: "Ящик игрушек", emoji: "🪀", price: 28, hint: "сам найдёт чем заняться" },
-  { id: "lamp", name: "Лампа", emoji: "💡", price: 32, hint: "уютнее ночью" },
-  { id: "curtains", name: "Шторы", emoji: "🪟", price: 36, hint: "комната как дом" },
-  { id: "fountain", name: "Поилка", emoji: "💧", price: 40, hint: "свежая водичка" },
+  { id: "rug", name: "Коврик", emoji: "🧶", price: 8, hint: "мягко сидеть" },
+  { id: "plant", name: "Растение", emoji: "🌿", price: 10, hint: "зелёный уголок" },
+  { id: "poster", name: "Постер", emoji: "🖼", price: 6, hint: "украшение стены" },
+  { id: "cushion", name: "Подушка", emoji: "🛋", price: 8, hint: "для дневного сна" },
+  { id: "toys", name: "Ящик игрушек", emoji: "🪀", price: 12, hint: "сам найдёт чем заняться" },
+  { id: "lamp", name: "Лампа", emoji: "💡", price: 14, hint: "уютнее ночью" },
+  { id: "curtains", name: "Шторы", emoji: "🪟", price: 16, hint: "комната как дом" },
+  { id: "fountain", name: "Поилка", emoji: "💧", price: 18, hint: "свежая водичка" },
 ];
 
 function animalSvg(id) {
   const a = ANIMALS[id];
   const c = a.colors;
-  const commonEyes = `
+  const ink = c.ink;
+  const eyes = (cx, cy) => `
+    <ellipse class="blush" cx="${cx - 13}" cy="${cy + 7}" rx="4.2" ry="2.6" fill="#E8A8B4" opacity="0.55"/>
+    <ellipse class="blush" cx="${cx + 13}" cy="${cy + 7}" rx="4.2" ry="2.6" fill="#E8A8B4" opacity="0.55"/>
     <g class="eyes">
-      <ellipse cx="28" cy="30" rx="4.2" ry="4.6" fill="${c.ink}"/>
-      <ellipse cx="44" cy="30" rx="4.2" ry="4.6" fill="${c.ink}"/>
-      <circle cx="29.4" cy="28.6" r="1.3" fill="#fff"/>
-      <circle cx="45.4" cy="28.6" r="1.3" fill="#fff"/>
+      <ellipse cx="${cx - 7}" cy="${cy}" rx="4.6" ry="5.2" fill="${ink}"/>
+      <ellipse cx="${cx + 7}" cy="${cy}" rx="4.6" ry="5.2" fill="${ink}"/>
+      <circle cx="${cx - 5.4}" cy="${cy - 1.6}" r="1.6" fill="#fff"/>
+      <circle cx="${cx + 8.6}" cy="${cy - 1.6}" r="1.6" fill="#fff"/>
+      <circle cx="${cx - 6.2}" cy="${cy + 1.2}" r="0.7" fill="#fff" opacity="0.7"/>
     </g>
-    <path d="M34 36 q2 3 4 0" fill="none" stroke="${c.ink}" stroke-width="1.6" stroke-linecap="round"/>`;
+    <ellipse cx="${cx}" cy="${cy + 6.5}" rx="2.4" ry="1.7" fill="${ink}"/>
+    <path d="M${cx - 3.2} ${cy + 10.5} q3.2 3.8 6.4 0" fill="none" stroke="${ink}" stroke-width="1.7" stroke-linecap="round"/>`;
 
   const bodies = {
-    fox: `<ellipse cx="36" cy="42" rx="22" ry="18" fill="${c.body}" stroke="${c.ink}" stroke-width="2.4"/>
-      <ellipse cx="36" cy="48" rx="12" ry="9" fill="${c.belly}"/>
-      <polygon points="16,22 22,8 28,22" fill="${c.ear}" stroke="${c.ink}" stroke-width="2"/>
-      <polygon points="44,22 50,8 56,22" fill="${c.ear}" stroke="${c.ink}" stroke-width="2"/>
-      <polygon points="18,20 22,12 26,20" fill="${c.belly}"/>
-      <polygon points="46,20 50,12 54,20" fill="${c.belly}"/>
-      <path d="M56 48 q18 -6 16 14 q-14 -6 -22 -4" fill="${c.body}" stroke="${c.ink}" stroke-width="2.2"/>
-      <path d="M62 56 q8 4 8 10" fill="${c.belly}"/>
-      ${commonEyes}`,
-    panda: `<ellipse cx="36" cy="44" rx="22" ry="18" fill="${c.body}" stroke="${c.ink}" stroke-width="2.4"/>
-      <circle cx="18" cy="20" r="9" fill="${c.ear}" stroke="${c.ink}" stroke-width="2"/>
-      <circle cx="54" cy="20" r="9" fill="${c.ear}" stroke="${c.ink}" stroke-width="2"/>
-      <ellipse cx="36" cy="50" rx="13" ry="10" fill="#fff"/>
-      <ellipse cx="27" cy="31" rx="8" ry="7" fill="${c.ear}"/>
-      <ellipse cx="45" cy="31" rx="8" ry="7" fill="${c.ear}"/>
-      ${commonEyes}`,
-    frog: `<ellipse cx="36" cy="46" rx="24" ry="16" fill="${c.body}" stroke="${c.ink}" stroke-width="2.4"/>
-      <ellipse cx="36" cy="52" rx="14" ry="8" fill="${c.belly}"/>
-      <circle cx="22" cy="24" r="10" fill="${c.body}" stroke="${c.ink}" stroke-width="2"/>
-      <circle cx="50" cy="24" r="10" fill="${c.body}" stroke="${c.ink}" stroke-width="2"/>
-      <circle cx="22" cy="24" r="4.5" fill="#fff"/><circle cx="50" cy="24" r="4.5" fill="#fff"/>
-      <circle cx="23" cy="25" r="2.4" fill="${c.ink}"/><circle cx="51" cy="25" r="2.4" fill="${c.ink}"/>
-      <path d="M28 44 q8 8 16 0" fill="none" stroke="${c.ink}" stroke-width="2" stroke-linecap="round"/>`,
-    penguin: `<ellipse cx="36" cy="42" rx="18" ry="22" fill="${c.body}" stroke="${c.ink}" stroke-width="2.4"/>
-      <ellipse cx="36" cy="48" rx="11" ry="14" fill="${c.belly}"/>
-      <ellipse cx="18" cy="46" rx="6" ry="10" fill="${c.body}" stroke="${c.ink}" stroke-width="2"/>
-      <ellipse cx="54" cy="46" rx="6" ry="10" fill="${c.body}" stroke="${c.ink}" stroke-width="2"/>
-      <polygon points="32,34 36,40 40,34" fill="${c.ear}"/>
-      ${commonEyes}`,
-    otter: `<ellipse cx="34" cy="44" rx="24" ry="14" fill="${c.body}" stroke="${c.ink}" stroke-width="2.4"/>
-      <ellipse cx="34" cy="48" rx="14" ry="8" fill="${c.belly}"/>
-      <circle cx="20" cy="32" r="12" fill="${c.body}" stroke="${c.ink}" stroke-width="2.2"/>
-      <path d="M56 44 q16 4 14 16 q-12 -4 -20 -6" fill="${c.body}" stroke="${c.ink}" stroke-width="2"/>
-      <circle cx="16" cy="24" r="4" fill="${c.ear}" stroke="${c.ink}" stroke-width="1.6"/>
-      <circle cx="28" cy="22" r="4" fill="${c.ear}" stroke="${c.ink}" stroke-width="1.6"/>
-      <ellipse cx="18" cy="32" rx="3.2" ry="3.6" fill="${c.ink}"/>
-      <ellipse cx="26" cy="32" rx="3.2" ry="3.6" fill="${c.ink}"/>
-      <circle cx="19.2" cy="30.8" r="1" fill="#fff"/><circle cx="27.2" cy="30.8" r="1" fill="#fff"/>`,
-    hedgehog: `<ellipse cx="36" cy="46" rx="22" ry="16" fill="${c.body}" stroke="${c.ink}" stroke-width="2.4"/>
-      <path d="M16 40 l6 -16 l8 10 l8 -14 l8 14 l8 -10 l6 16" fill="#5C4632" stroke="${c.ink}" stroke-width="2"/>
-      <ellipse cx="24" cy="50" rx="10" ry="8" fill="${c.belly}"/>
-      <circle cx="18" cy="48" r="3.2" fill="${c.ink}"/>
-      <circle cx="26" cy="46" r="3.2" fill="${c.ink}"/>
-      <circle cx="19.2" cy="46.8" r="1" fill="#fff"/><circle cx="27.2" cy="44.8" r="1" fill="#fff"/>
-      <ellipse cx="14" cy="52" rx="4" ry="2.2" fill="${c.ear}"/>`,
-    koala: `<ellipse cx="36" cy="44" rx="18" ry="18" fill="${c.body}" stroke="${c.ink}" stroke-width="2.4"/>
-      <circle cx="16" cy="24" r="12" fill="${c.ear}" stroke="${c.ink}" stroke-width="2.2"/>
-      <circle cx="56" cy="24" r="12" fill="${c.ear}" stroke="${c.ink}" stroke-width="2.2"/>
-      <circle cx="16" cy="24" r="6" fill="${c.belly}"/><circle cx="56" cy="24" r="6" fill="${c.belly}"/>
-      <ellipse cx="36" cy="38" rx="7" ry="5" fill="#E8B4C4"/>
-      ${commonEyes}`,
-    raccoon: `<ellipse cx="36" cy="44" rx="20" ry="18" fill="${c.body}" stroke="${c.ink}" stroke-width="2.4"/>
-      <circle cx="18" cy="20" r="8" fill="${c.ear}" stroke="${c.ink}" stroke-width="2"/>
-      <circle cx="54" cy="20" r="8" fill="${c.ear}" stroke="${c.ink}" stroke-width="2"/>
-      <ellipse cx="36" cy="50" rx="12" ry="9" fill="${c.belly}"/>
-      <path d="M20 30 h32 v10 q-16 6 -32 0 z" fill="#2A2420"/>
-      <path d="M56 48 q12 2 10 14 q-8 -2 -16 -4" fill="${c.body}" stroke="${c.ink}" stroke-width="2"/>
-      ${commonEyes.replace('cy="30"', 'cy="32"').replace('cy="28.6"', 'cy="30.6"')}`,
-    flamingo: `<path d="M40 18 q18 8 14 28 q-2 18 -16 26" fill="${c.body}" stroke="${c.ink}" stroke-width="2.3"/>
-      <circle cx="36" cy="18" r="10" fill="${c.body}" stroke="${c.ink}" stroke-width="2.2"/>
-      <path d="M26 18 q-10 2 -8 8 q8 0 12 -4" fill="#E07A3D" stroke="${c.ink}" stroke-width="1.6"/>
-      <path d="M38 70 v8" stroke="${c.ink}" stroke-width="2.4" stroke-linecap="round"/>
-      <path d="M44 70 v8" stroke="${c.ink}" stroke-width="2.4" stroke-linecap="round"/>
-      <circle cx="33" cy="16" r="2.4" fill="${c.ink}"/>
-      <circle cx="34.2" cy="15.2" r="0.8" fill="#fff"/>`,
-    alpaca: `<ellipse cx="36" cy="48" rx="16" ry="18" fill="${c.body}" stroke="${c.ink}" stroke-width="2.4"/>
-      <rect x="28" y="14" width="16" height="22" rx="8" fill="${c.body}" stroke="${c.ink}" stroke-width="2.2"/>
-      <circle cx="24" cy="16" r="6" fill="${c.ear}" stroke="${c.ink}" stroke-width="2"/>
-      <circle cx="48" cy="16" r="6" fill="${c.ear}" stroke="${c.ink}" stroke-width="2"/>
-      <ellipse cx="36" cy="28" rx="5" ry="3.5" fill="#E8B4C4"/>
-      <circle cx="32" cy="24" r="2.2" fill="${c.ink}"/>
-      <circle cx="40" cy="24" r="2.2" fill="${c.ink}"/>
-      <circle cx="32.8" cy="23.2" r="0.8" fill="#fff"/>
-      <circle cx="40.8" cy="23.2" r="0.8" fill="#fff"/>`,
-    squirrel: `<ellipse cx="34" cy="46" rx="16" ry="14" fill="${c.body}" stroke="${c.ink}" stroke-width="2.4"/>
-      <circle cx="24" cy="32" r="12" fill="${c.body}" stroke="${c.ink}" stroke-width="2.2"/>
-      <polygon points="16,24 18,10 26,22" fill="${c.ear}" stroke="${c.ink}" stroke-width="2"/>
-      <polygon points="26,22 32,10 34,24" fill="${c.ear}" stroke="${c.ink}" stroke-width="2"/>
-      <path d="M48 44 q18 -20 8 18 q-8 8 -20 2" fill="${c.body}" stroke="${c.ink}" stroke-width="2.2"/>
-      <ellipse cx="22" cy="34" rx="3" ry="3.3" fill="${c.ink}"/>
-      <ellipse cx="30" cy="34" rx="3" ry="3.3" fill="${c.ink}"/>
-      <circle cx="23.2" cy="32.8" r="1" fill="#fff"/><circle cx="31.2" cy="32.8" r="1" fill="#fff"/>
-      <ellipse cx="18" cy="40" rx="3" ry="2" fill="${c.ear}"/>`,
+    fox: `
+      <ellipse cx="22" cy="86" rx="8" ry="6" fill="${c.body}" stroke="${ink}" stroke-width="2"/>
+      <ellipse cx="50" cy="86" rx="8" ry="6" fill="${c.body}" stroke="${ink}" stroke-width="2"/>
+      <path class="tail" d="M58 58 q22 -8 18 22 q-16 -6 -26 -8" fill="${c.body}" stroke="${ink}" stroke-width="2.2"/>
+      <path d="M68 72 q8 6 6 14" fill="${c.belly}"/>
+      <ellipse cx="36" cy="68" rx="22" ry="18" fill="${c.body}" stroke="${ink}" stroke-width="2.4"/>
+      <ellipse cx="36" cy="74" rx="12" ry="10" fill="${c.belly}"/>
+      <circle cx="36" cy="36" r="18" fill="${c.body}" stroke="${ink}" stroke-width="2.4"/>
+      <polygon points="20,28 24,8 32,26" fill="${c.ear}" stroke="${ink}" stroke-width="2"/>
+      <polygon points="40,26 48,8 52,28" fill="${c.ear}" stroke="${ink}" stroke-width="2"/>
+      <polygon points="23,24 25,14 30,24" fill="${c.belly}"/>
+      <polygon points="42,24 47,14 49,24" fill="${c.belly}"/>
+      ${eyes(36, 36)}`,
+    panda: `
+      <ellipse cx="22" cy="86" rx="9" ry="7" fill="#2A2420" stroke="${ink}" stroke-width="2"/>
+      <ellipse cx="50" cy="86" rx="9" ry="7" fill="#2A2420" stroke="${ink}" stroke-width="2"/>
+      <ellipse cx="36" cy="68" rx="22" ry="18" fill="#fff" stroke="${ink}" stroke-width="2.4"/>
+      <ellipse cx="16" cy="66" rx="8" ry="12" fill="#2A2420" stroke="${ink}" stroke-width="2"/>
+      <ellipse cx="56" cy="66" rx="8" ry="12" fill="#2A2420" stroke="${ink}" stroke-width="2"/>
+      <circle cx="36" cy="34" r="20" fill="#fff" stroke="${ink}" stroke-width="2.4"/>
+      <circle cx="18" cy="18" r="9" fill="#2A2420" stroke="${ink}" stroke-width="2"/>
+      <circle cx="54" cy="18" r="9" fill="#2A2420" stroke="${ink}" stroke-width="2"/>
+      <ellipse cx="27" cy="34" rx="8" ry="7" fill="#2A2420"/>
+      <ellipse cx="45" cy="34" rx="8" ry="7" fill="#2A2420"/>
+      ${eyes(36, 34)}`,
+    frog: `
+      <ellipse cx="20" cy="84" rx="10" ry="7" fill="${c.ear}" stroke="${ink}" stroke-width="2"/>
+      <ellipse cx="52" cy="84" rx="10" ry="7" fill="${c.ear}" stroke="${ink}" stroke-width="2"/>
+      <ellipse cx="36" cy="66" rx="24" ry="18" fill="${c.body}" stroke="${ink}" stroke-width="2.4"/>
+      <ellipse cx="36" cy="72" rx="14" ry="10" fill="${c.belly}"/>
+      <circle cx="22" cy="30" r="12" fill="${c.body}" stroke="${ink}" stroke-width="2"/>
+      <circle cx="50" cy="30" r="12" fill="${c.body}" stroke="${ink}" stroke-width="2"/>
+      <g class="eyes">
+      <circle cx="22" cy="30" r="5.2" fill="#fff"/><circle cx="50" cy="30" r="5.2" fill="#fff"/>
+      <circle cx="23" cy="31" r="2.6" fill="${ink}"/><circle cx="51" cy="31" r="2.6" fill="${ink}"/>
+      </g>
+      <path d="M28 62 q8 10 16 0" fill="none" stroke="${ink}" stroke-width="2.2" stroke-linecap="round"/>`,
+    penguin: `
+      <ellipse cx="24" cy="88" rx="7" ry="5" fill="#E07A3D" stroke="${ink}" stroke-width="2"/>
+      <ellipse cx="48" cy="88" rx="7" ry="5" fill="#E07A3D" stroke="${ink}" stroke-width="2"/>
+      <ellipse cx="36" cy="58" rx="20" ry="26" fill="${c.body}" stroke="${ink}" stroke-width="2.4"/>
+      <ellipse cx="36" cy="64" rx="13" ry="18" fill="${c.belly}"/>
+      <ellipse cx="16" cy="60" rx="7" ry="12" fill="${c.body}" stroke="${ink}" stroke-width="2"/>
+      <ellipse cx="56" cy="60" rx="7" ry="12" fill="${c.body}" stroke="${ink}" stroke-width="2"/>
+      <circle cx="36" cy="28" r="16" fill="${c.body}" stroke="${ink}" stroke-width="2.3"/>
+      <ellipse cx="36" cy="32" rx="9" ry="8" fill="${c.belly}"/>
+      <polygon points="32,34 36,42 40,34" fill="${c.ear}"/>
+      ${eyes(36, 26)}`,
+    otter: `
+      <ellipse cx="18" cy="86" rx="8" ry="6" fill="${c.body}" stroke="${ink}" stroke-width="2"/>
+      <ellipse cx="40" cy="86" rx="8" ry="6" fill="${c.body}" stroke="${ink}" stroke-width="2"/>
+      <path class="tail" d="M52 62 q24 4 18 24 q-16 -4 -24 -8" fill="${c.body}" stroke="${ink}" stroke-width="2.2"/>
+      <ellipse cx="32" cy="66" rx="22" ry="16" fill="${c.body}" stroke="${ink}" stroke-width="2.4"/>
+      <ellipse cx="32" cy="70" rx="13" ry="9" fill="${c.belly}"/>
+      <circle cx="22" cy="38" r="16" fill="${c.body}" stroke="${ink}" stroke-width="2.3"/>
+      <circle cx="12" cy="26" r="5" fill="${c.ear}" stroke="${ink}" stroke-width="1.8"/>
+      <circle cx="30" cy="24" r="5" fill="${c.ear}" stroke="${ink}" stroke-width="1.8"/>
+      ${eyes(22, 38)}`,
+    hedgehog: `
+      <ellipse cx="24" cy="86" rx="8" ry="6" fill="${c.body}" stroke="${ink}" stroke-width="2"/>
+      <ellipse cx="48" cy="86" rx="8" ry="6" fill="${c.body}" stroke="${ink}" stroke-width="2"/>
+      <path d="M14 58 l8 -20 l10 12 l10 -18 l10 18 l10 -12 l8 20" fill="#5C4632" stroke="${ink}" stroke-width="2"/>
+      <ellipse cx="36" cy="68" rx="22" ry="16" fill="${c.body}" stroke="${ink}" stroke-width="2.4"/>
+      <ellipse cx="26" cy="72" rx="11" ry="8" fill="${c.belly}"/>
+      <circle cx="20" cy="64" r="10" fill="${c.belly}" stroke="${ink}" stroke-width="2"/>
+      <g class="eyes">
+      <circle cx="16" cy="62" r="2.8" fill="${ink}"/>
+      <circle cx="24" cy="60" r="2.8" fill="${ink}"/>
+      <circle cx="17.2" cy="60.8" r="0.9" fill="#fff"/>
+      <circle cx="25.2" cy="58.8" r="0.9" fill="#fff"/>
+      </g>
+      <ellipse cx="12" cy="66" rx="4" ry="2.2" fill="${c.ear}"/>`,
+    koala: `
+      <ellipse cx="22" cy="86" rx="8" ry="6" fill="${c.body}" stroke="${ink}" stroke-width="2"/>
+      <ellipse cx="50" cy="86" rx="8" ry="6" fill="${c.body}" stroke="${ink}" stroke-width="2"/>
+      <ellipse cx="36" cy="68" rx="20" ry="18" fill="${c.body}" stroke="${ink}" stroke-width="2.4"/>
+      <ellipse cx="36" cy="74" rx="11" ry="9" fill="${c.belly}"/>
+      <circle cx="36" cy="36" r="18" fill="${c.body}" stroke="${ink}" stroke-width="2.4"/>
+      <circle cx="16" cy="22" r="13" fill="${c.ear}" stroke="${ink}" stroke-width="2.2"/>
+      <circle cx="56" cy="22" r="13" fill="${c.ear}" stroke="${ink}" stroke-width="2.2"/>
+      <circle cx="16" cy="22" r="6" fill="${c.belly}"/><circle cx="56" cy="22" r="6" fill="${c.belly}"/>
+      <ellipse cx="36" cy="42" rx="7" ry="5" fill="#E8B4C4"/>
+      ${eyes(36, 34)}`,
+    raccoon: `
+      <ellipse cx="22" cy="86" rx="8" ry="6" fill="${c.ear}" stroke="${ink}" stroke-width="2"/>
+      <ellipse cx="50" cy="86" rx="8" ry="6" fill="${c.ear}" stroke="${ink}" stroke-width="2"/>
+      <path class="tail" d="M56 64 q18 4 14 22 q-12 -4 -20 -8" fill="${c.body}" stroke="${ink}" stroke-width="2"/>
+      <ellipse cx="36" cy="68" rx="20" ry="17" fill="${c.body}" stroke="${ink}" stroke-width="2.4"/>
+      <ellipse cx="36" cy="74" rx="12" ry="9" fill="${c.belly}"/>
+      <circle cx="36" cy="34" r="18" fill="${c.body}" stroke="${ink}" stroke-width="2.3"/>
+      <circle cx="18" cy="18" r="8" fill="${c.ear}" stroke="${ink}" stroke-width="2"/>
+      <circle cx="54" cy="18" r="8" fill="${c.ear}" stroke="${ink}" stroke-width="2"/>
+      <path d="M20 32 h32 v12 q-16 7 -32 0 z" fill="#2A2420"/>
+      ${eyes(36, 36)}`,
+    flamingo: `
+      <path d="M30 88 q2 -18 4 -36" stroke="${ink}" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M42 88 q-2 -16 0 -34" stroke="${ink}" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <ellipse cx="38" cy="48" rx="16" ry="20" fill="${c.body}" stroke="${ink}" stroke-width="2.3"/>
+      <circle cx="34" cy="22" r="12" fill="${c.body}" stroke="${ink}" stroke-width="2.2"/>
+      <path d="M22 22 q-12 2 -10 9 q10 0 14 -5" fill="#E07A3D" stroke="${ink}" stroke-width="1.6"/>
+      <g class="eyes">
+      <circle cx="31" cy="20" r="2.6" fill="${ink}"/>
+      <circle cx="32.2" cy="19" r="0.9" fill="#fff"/>
+      </g>`,
+    alpaca: `
+      <ellipse cx="24" cy="88" rx="7" ry="5" fill="${c.ear}" stroke="${ink}" stroke-width="2"/>
+      <ellipse cx="48" cy="88" rx="7" ry="5" fill="${c.ear}" stroke="${ink}" stroke-width="2"/>
+      <ellipse cx="36" cy="68" rx="20" ry="20" fill="${c.body}" stroke="${ink}" stroke-width="2.4"/>
+      <rect x="28" y="18" width="16" height="34" rx="8" fill="${c.body}" stroke="${ink}" stroke-width="2.2"/>
+      <circle cx="24" cy="20" r="7" fill="${c.ear}" stroke="${ink}" stroke-width="2"/>
+      <circle cx="52" cy="20" r="7" fill="${c.ear}" stroke="${ink}" stroke-width="2"/>
+      <ellipse cx="36" cy="36" rx="6" ry="4" fill="#E8B4C4"/>
+      <g class="eyes">
+      <circle cx="32" cy="30" r="2.4" fill="${ink}"/>
+      <circle cx="40" cy="30" r="2.4" fill="${ink}"/>
+      <circle cx="32.8" cy="29.2" r="0.8" fill="#fff"/>
+      <circle cx="40.8" cy="29.2" r="0.8" fill="#fff"/>
+      </g>`,
+    squirrel: `
+      <ellipse cx="20" cy="86" rx="7" ry="6" fill="${c.body}" stroke="${ink}" stroke-width="2"/>
+      <ellipse cx="40" cy="86" rx="7" ry="6" fill="${c.body}" stroke="${ink}" stroke-width="2"/>
+      <path class="tail" d="M48 58 q24 -24 10 26 q-10 10 -24 2" fill="${c.body}" stroke="${ink}" stroke-width="2.2"/>
+      <ellipse cx="32" cy="68" rx="16" ry="16" fill="${c.body}" stroke="${ink}" stroke-width="2.4"/>
+      <ellipse cx="32" cy="74" rx="9" ry="8" fill="${c.belly}"/>
+      <circle cx="24" cy="38" r="16" fill="${c.body}" stroke="${ink}" stroke-width="2.3"/>
+      <polygon points="14,30 16,12 26,28" fill="${c.ear}" stroke="${ink}" stroke-width="2"/>
+      <polygon points="26,28 34,12 36,30" fill="${c.ear}" stroke="${ink}" stroke-width="2"/>
+      ${eyes(24, 38)}
+      <ellipse cx="16" cy="46" rx="3.2" ry="2.2" fill="${c.ear}"/>`,
   };
 
-  return `<svg viewBox="0 0 72 78" aria-hidden="true">${bodies[id] || bodies.fox}</svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 96" aria-hidden="true">${bodies[id] || bodies.fox}</svg>`;
 }
 
 function pickHatchAnimal(egg) {

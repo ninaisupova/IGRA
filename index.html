@@ -29,38 +29,67 @@
       </header>
 
       <div class="screen" id="screen" data-time="day">
-        <div class="sky" id="sky">
-          <div class="sun" id="sun"></div>
-          <div class="moon" id="moon"></div>
-          <div class="stars-sky" id="stars-sky"></div>
-          <div class="cloud c1"></div>
-          <div class="cloud c2"></div>
-        </div>
+        <div class="pet-nameplate" id="pet-label" hidden></div>
 
         <div class="room" id="room">
-          <div class="wall" id="wall">
+          <div class="ceiling"></div>
+          <div class="wall" id="wall"></div>
+          <div class="floor"></div>
+          <div class="floor-shadow"></div>
+
+          <div class="room-stage">
             <div class="window-frame">
               <div class="window-glass" id="window-glass">
+                <div class="street" aria-hidden="true">
+                  <div class="street-sky">
+                    <div class="street-sun"></div>
+                    <div class="street-moon"></div>
+                    <div class="stars-sky" id="stars-sky"></div>
+                    <div class="street-cloud"></div>
+                  </div>
+                  <div class="building b1"><i></i><i></i><i></i><i></i></div>
+                  <div class="building b2"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                  <div class="building b3"><i></i><i></i><i></i><i></i></div>
+                  <div class="street-tree"></div>
+                  <div class="street-road"></div>
+                </div>
                 <div class="rain" id="rain"></div>
                 <div class="bird" id="bird"></div>
+                <div class="window-sash"></div>
               </div>
             </div>
-            <div class="poster" id="furn-poster" hidden></div>
-            <div class="shelf" id="furn-plant" hidden>
-              <div class="plant"></div>
-            </div>
-          </div>
 
-          <div class="lamp" id="furn-lamp" hidden></div>
-          <div class="curtains" id="furn-curtains" hidden></div>
+          <div class="poster" id="furn-poster" hidden>
+            <div class="poster-art"></div>
+          </div>
+          <div class="lamp" id="furn-lamp" hidden>
+            <div class="lamp-shade"></div>
+            <div class="lamp-pole"></div>
+            <div class="lamp-base"></div>
+          </div>
+          <div class="curtains" id="furn-curtains" hidden>
+            <div class="curtain-rod"></div>
+            <div class="curtain-panel curtain-left"></div>
+            <div class="curtain-panel curtain-right"></div>
+          </div>
           <div class="rug" id="furn-rug" hidden></div>
+          <div class="floor-plant" id="furn-plant" hidden>
+            <div class="leaf l1"></div>
+            <div class="leaf l2"></div>
+            <div class="leaf l3"></div>
+            <div class="leaf l4"></div>
+            <div class="pot-base"></div>
+          </div>
           <div class="cushion" id="furn-cushion" hidden></div>
           <div class="toybox" id="furn-toys" hidden>
-            <span>🪀</span>
+            <span class="toy-block"></span>
           </div>
-          <div class="fountain" id="furn-fountain" hidden></div>
+          <div class="fountain" id="furn-fountain" hidden>
+            <div class="water-bowl"></div>
+          </div>
 
           <div class="bed" id="bed" data-interact="bed" title="Кроватка">
+            <div class="bed-legs"></div>
             <div class="pillow"></div>
             <div class="blanket"></div>
           </div>
@@ -68,9 +97,6 @@
             <div class="bowl-food" id="bowl-food"></div>
           </div>
           <div class="ball" id="ball" data-interact="toy" title="Игрушка"></div>
-
-          <div class="floor"></div>
-          <div class="floor-shadow"></div>
 
           <div class="egg" id="egg" data-interact="egg">
             <div class="egg-shell"></div>
@@ -96,12 +122,14 @@
 
           <div class="speech" id="speech" hidden></div>
           <div class="event-layer" id="event-layer"></div>
+          </div>
         </div>
 
         <div class="vignette"></div>
         <div class="grain"></div>
       </div>
 
+      <div class="hud">
       <div class="needs" id="needs" aria-label="Самочувствие питомца">
         <button type="button" class="need" data-need="hunger" title="Голод">
           <span class="need-icon">🍽</span>
@@ -141,6 +169,7 @@
           <button type="button" class="pad-btn pad-right" data-dir="right" aria-label="Вправо">▶</button>
         </div>
         <button type="button" class="pad-action" id="pad-action" aria-label="Действие">●</button>
+      </div>
       </div>
     </div>
   </div>

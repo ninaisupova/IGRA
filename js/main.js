@@ -70,6 +70,8 @@ const Game = {
     pet.hidden = !living;
     const hint = document.getElementById("egg-hint");
     if (hint) hint.hidden = living;
+    const tag = document.getElementById("pet-label");
+    if (tag) tag.hidden = !living;
     document.querySelectorAll("#care-bar .care-btn").forEach((btn) => {
       if (btn.id === "btn-shop" || btn.id === "btn-help") return;
       btn.disabled = !living && btn.id !== "btn-pet";
@@ -78,15 +80,25 @@ const Game = {
     document.getElementById("btn-play").disabled = !living;
     document.getElementById("btn-sleep").disabled = !living;
     document.getElementById("btn-games").disabled = !living;
-    if (living) this.renderPetBody();
+    if (living) {
+      this.renderPetBody();
+      pet.style.left = (s.pet.x || 52) + "%";
+      pet.hidden = false;
+    }
     this.updateEggLook();
   },
 
   renderPetBody() {
     const s = GameState.data;
+    const animal = ANIMALS[s.animalId] || ANIMALS.fox;
     const body = document.getElementById("pet-body");
-    body.innerHTML = animalSvg(s.animalId);
+    body.innerHTML = animalSvg(animal.id) + `<span class="pet-emoji">${animal.emoji}</span>`;
     document.getElementById("pet").classList.toggle("baby", Date.now() < s.babyUntil);
+    const tag = document.getElementById("pet-label");
+    if (tag) {
+      tag.hidden = false;
+      tag.textContent = s.name || animal.defaultName;
+    }
   },
 
   renderFurniture() {
@@ -109,14 +121,17 @@ const Game = {
   loop(t) {
     const dt = Math.min(0.05, (t - this.last) / 1000) || 0.016;
     this.last = t;
-    this.updatePlayer(dt);
-    this.updateEgg(dt);
-    World.advance(dt);
-    PetAI.think(t);
-    PetAI.update(dt);
-    this.needsTick(dt);
-    this.events(t);
-    this.render();
+    try {
+      this.updatePlayer(dt);
+      World.advance(dt);
+      PetAI.think(t);
+      PetAI.update(dt);
+      this.needsTick(dt);
+      this.events(t);
+      this.render();
+    } catch (err) {
+      console.error(err);
+    }
     requestAnimationFrame((n) => this.loop(n));
   },
 
@@ -139,7 +154,7 @@ const Game = {
     let vx = 0;
     if (Input.left) vx -= 1;
     if (Input.right) vx += 1;
-    p.x = clamp(p.x + vx * 38 * dt, 8, 92);
+    p.x = clamp(p.x + vx * 38 * dt, 4, 96);
     if (vx) p.facing = vx > 0 ? 1 : -1;
     const el = document.getElementById("player");
     el.classList.toggle("walk", vx !== 0 && !p.jumping);
@@ -252,8 +267,8 @@ const Game = {
     }
     if (ev === "star") this.spark(20 + Math.random() * 60, "★");
     if (ev === "sparkle") this.spark(GameState.data.pet.x, "✦");
-    if (ev === "find") {
-      GameState.addStars(2);
+    if (ev === "find" && Math.random() < 0.35) {
+      GameState.addStars(1);
       PetAI.say("search");
       this.spark(GameState.data.pet.x, "★");
     }

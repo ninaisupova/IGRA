@@ -45,12 +45,15 @@ const Input = {
   onKey(e, down) {
     const overlayOpen = !document.getElementById("overlay").hidden;
     if (overlayOpen && MiniGames.active && MiniGames.active !== "hide") {
+      if (e.code === "ArrowLeft" || e.code === "KeyA") MiniGames.setHold("left", down);
+      if (e.code === "ArrowRight" || e.code === "KeyD") MiniGames.setHold("right", down);
       if (e.code === "ArrowLeft" || e.code === "KeyA") MiniGames.move(-1);
       if (e.code === "ArrowRight" || e.code === "KeyD") MiniGames.move(1);
-      if (e.code === "Space") {
+      if ((e.code === "Space" || e.code === "ArrowUp") && down) {
         e.preventDefault();
         MiniGames.jump();
       }
+      if (e.code === "Space") e.preventDefault();
       return;
     }
     if (overlayOpen) return;
@@ -72,9 +75,9 @@ const Input = {
     if (dir === "right") this.right = down;
     if (dir === "jump") this.jump = down;
     if (MiniGames.active && MiniGames.active !== "hide") {
-      if (dir === "left") MiniGames.move(-1);
-      if (dir === "right") MiniGames.move(1);
-      if (dir === "jump") MiniGames.jump();
+      if (dir === "left") MiniGames.setHold("left", down);
+      if (dir === "right") MiniGames.setHold("right", down);
+      if (dir === "jump" && down) MiniGames.jump();
     }
   },
 

@@ -115,14 +115,14 @@ const PetAI = {
       return;
     }
     if (n.hunger < 32 && Math.random() < 0.7) {
-      p.target = 12;
+      p.target = 6;
       p.action = "sad";
       p.emotion = "hungry";
       this.say("hungry");
       return;
     }
     if (n.play < 30 || (playful && Math.random() < 0.3)) {
-      p.target = s.furniture.includes("toys") ? 72 : 50;
+      p.target = s.furniture.includes("toys") ? 78 : (Math.random() < 0.5 ? 8 : 92);
       p.action = "search";
       p.emotion = "search";
       this.say(playful ? "playful" : "search");
@@ -135,15 +135,15 @@ const PetAI = {
       if (Math.random() < 0.5) this.say("sad");
       return;
     }
-    if (independent && Math.random() < 0.4) {
-      p.target = 10 + Math.random() * 80;
+    if (independent && Math.random() < 0.45) {
+      p.target = this.wanderX();
       p.action = "walk";
       p.emotion = "curious";
       if (Math.random() < 0.4) this.say("independent");
       return;
     }
-    if (Math.random() < 0.25) {
-      p.target = 12 + Math.random() * 76;
+    if (Math.random() < 0.42) {
+      p.target = this.wanderX();
       p.action = "walk";
       p.emotion = playful ? "playful" : "curious";
       return;
@@ -158,9 +158,15 @@ const PetAI = {
     p.emotion = this.moodKey();
   },
 
+  wanderX() {
+    if (Math.random() < 0.35) return Math.random() < 0.5 ? 5 : 95;
+    return 5 + Math.random() * 90;
+  },
+
   goSleep(autonomous) {
     const p = GameState.data.pet;
-    p.target = 84;
+    p.target = 80;
+    p.facing = 1;
     p.action = "walk";
     p.emotion = "sleepy";
     p.wantSleep = true;
@@ -172,19 +178,23 @@ const PetAI = {
     const p = s.pet;
     if (s.phase !== "living") return;
 
-    const speed = 11 + this.trait("playfulness") * 0.06;
+    const speed = 14 + this.trait("playfulness") * 0.08;
     const dx = p.target - p.x;
-    if (Math.abs(dx) > 1.2 && p.action !== "sleep") {
-      p.x += Math.sign(dx) * Math.min(Math.abs(dx), speed * dt);
+    if (Math.abs(dx) > 0.6 && p.action !== "sleep") {
+      p.x = Math.max(5, Math.min(95, p.x + Math.sign(dx) * Math.min(Math.abs(dx), speed * dt)));
       p.facing = dx >= 0 ? 1 : -1;
       if (p.action !== "search" && p.action !== "sad" && p.action !== "eat") p.action = "walk";
     } else if (p.wantSleep) {
+      p.x = 80;
+      p.facing = 1;
       p.action = "sleep";
       p.emotion = "sleepy";
       p.wantSleep = false;
       if (!p.sleepAuto) this.say("sleepy");
     } else if (p.action === "walk") {
       p.action = "idle";
+    } else if (p.action === "idle" && Math.random() < dt * 0.12) {
+      p.facing *= -1;
     }
 
     if (p.action === "sleep") {
@@ -203,11 +213,11 @@ const PetAI = {
     GameState.changeNeed("mood", food.mood);
     GameState.changeNeed("attention", 6);
     Object.entries(food.traits).forEach(([k, v]) => GameState.changeTrait(k, v));
-    s.pet.target = 14;
+    s.pet.target = 6;
     s.pet.action = "eat";
     s.pet.emotion = "happy";
     this.say("happy");
-    GameState.addStars(1);
+    if (Math.random() < 0.1) GameState.addStars(1);
   },
 
   petting() {
@@ -220,7 +230,7 @@ const PetAI = {
     s.pet.action = "happy";
     s.pet.emotion = "love";
     this.say("love");
-    if (Math.random() < 0.2) GameState.addStars(1);
+    if (Math.random() < 0.08) GameState.addStars(1);
   },
 
   playWith() {
@@ -232,9 +242,9 @@ const PetAI = {
     this.nudgePersonality("play");
     s.pet.action = "happy";
     s.pet.emotion = "playful";
-    s.pet.target = 50 + (Math.random() * 20 - 10);
+    s.pet.target = 8 + Math.random() * 84;
     this.say("playful");
-    GameState.addStars(1);
+    if (Math.random() < 0.12) GameState.addStars(1);
   },
 
   putToBed() {
