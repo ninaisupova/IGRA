@@ -324,12 +324,278 @@ button {
 
 .room-stage {
   position: absolute;
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  width: min(720px, 100%);
-  transform: translateX(-50%);
+  inset: 0;
   z-index: 3;
+}
+
+.kitchen-tiles {
+  position: absolute;
+  left: 0;
+  top: 16px;
+  bottom: 30%;
+  width: 34%;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(#9ec9bc 0 0) 0 100% / 100% 38% no-repeat,
+    repeating-linear-gradient(0deg, transparent 0 21px, rgba(58, 39, 35, 0.18) 21px 22px),
+    repeating-linear-gradient(90deg, #f4e4c8 0 27px, rgba(58, 39, 35, 0.16) 27px 28px),
+    #f4e4c8;
+}
+
+.kitchen-floor {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 34%;
+  height: 30%;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(90deg, #cbb58a 0 18px, #d8c49a 18px 36px);
+  border-right: 3px solid #5c3d2e;
+  box-shadow: inset 0 8px 0 rgba(58, 39, 35, 0.08);
+}
+
+.bedroom-wall {
+  position: absolute;
+  right: 0;
+  top: 16px;
+  bottom: 30%;
+  width: 31%;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(90deg, rgba(154, 63, 36, 0.06) 0 14px, transparent 14px 28px),
+    linear-gradient(180deg, #f3cfc4, #e8b49c);
+}
+
+.arch {
+  position: absolute;
+  left: 34%;
+  top: 16px;
+  bottom: 28%;
+  width: 16px;
+  z-index: 4;
+  pointer-events: none;
+  background: #7a4a2e;
+  border: 3px solid #3a2723;
+  box-shadow: 4px 0 0 rgba(58, 39, 35, 0.12);
+}
+
+.arch::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 72px;
+  height: 22px;
+  transform: translateX(-50%);
+  background: #7a4a2e;
+  border: 3px solid #3a2723;
+  border-radius: 0 0 18px 18px;
+}
+
+.screen[data-time="dusk"] .kitchen-tiles {
+  filter: saturate(0.9) brightness(0.92);
+}
+
+.screen[data-time="night"] .kitchen-tiles,
+.screen[data-time="night"] .bedroom-wall {
+  filter: brightness(0.48) saturate(0.7);
+}
+
+.screen[data-time="night"] .kitchen-floor {
+  filter: brightness(0.55);
+}
+
+.fridge {
+  position: absolute;
+  left: 10px;
+  bottom: 16%;
+  width: 72px;
+  height: 176px;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.fridge-freezer,
+.fridge-body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background: #eef3ea;
+  border: 3px solid #3a2723;
+  border-radius: 8px;
+}
+
+.fridge-freezer {
+  top: 0;
+  height: 48px;
+  box-shadow: inset 0 -6px 0 #d5ddd0;
+}
+
+.fridge-body {
+  top: 50px;
+  bottom: 0;
+  box-shadow: inset 0 -10px 0 #d5ddd0;
+}
+
+.fridge-handle {
+  position: absolute;
+  right: 8px;
+  top: 78px;
+  width: 6px;
+  height: 36px;
+  background: #c45e32;
+  border: 2px solid #3a2723;
+  border-radius: 4px;
+}
+
+.upper-cabs {
+  position: absolute;
+  left: 88px;
+  top: 26px;
+  width: calc(34% - 104px);
+  height: 46px;
+  z-index: 4;
+  pointer-events: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 6px;
+}
+
+.upper-cabs i {
+  display: block;
+  height: 100%;
+  background: #f3ddb8;
+  border: 3px solid #3a2723;
+  border-radius: 6px;
+  box-shadow: inset 0 -8px 0 #d7b07a;
+}
+
+.kitchen-set {
+  position: absolute;
+  left: 88px;
+  bottom: 16%;
+  width: calc(34% - 104px);
+  height: 92px;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.counter-top {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 14px;
+  background: #8a4e2c;
+  border: 3px solid #3a2723;
+  border-radius: 4px 4px 0 0;
+  z-index: 2;
+}
+
+.sink {
+  position: absolute;
+  left: 10%;
+  top: 6px;
+  width: 28%;
+  height: 18px;
+  background: #b9cfd4;
+  border: 3px solid #3a2723;
+  border-radius: 6px;
+  z-index: 3;
+}
+
+.faucet {
+  position: absolute;
+  left: 50%;
+  top: -16px;
+  width: 8px;
+  height: 18px;
+  background: #5c3d2e;
+  border: 2px solid #3a2723;
+  border-radius: 4px 4px 0 0;
+  transform: translateX(-50%);
+}
+
+.faucet::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 0;
+  width: 12px;
+  height: 6px;
+  background: #5c3d2e;
+  border: 2px solid #3a2723;
+  border-radius: 0 4px 4px 0;
+}
+
+.stove {
+  position: absolute;
+  right: 8%;
+  top: 6px;
+  width: 30%;
+  height: 18px;
+  background: #5c3d2e;
+  border: 3px solid #3a2723;
+  border-radius: 6px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.stove i {
+  width: 10px;
+  height: 10px;
+  border: 2px solid #e4ae45;
+  border-radius: 50%;
+}
+
+.cupboards {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 12px;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 8px 4px 0;
+}
+
+.cupboards i {
+  background: #e7cda6;
+  border: 3px solid #3a2723;
+  border-radius: 0 0 8px 8px;
+  box-shadow: inset 0 -10px 0 #c4a074;
+}
+
+.wardrobe {
+  position: absolute;
+  right: 21%;
+  left: auto;
+  bottom: 16%;
+  width: 84px;
+  height: 168px;
+  z-index: 2;
+  pointer-events: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  background: #c9844a;
+  border: 3px solid #3a2723;
+  border-radius: 8px 8px 4px 4px;
+  padding: 8px 6px 6px;
+  box-shadow: inset 0 10px 0 #a86a32;
+}
+
+.wardrobe i {
+  background: #e7cda6;
+  border: 3px solid #3a2723;
+  border-radius: 4px;
 }
 
 .ceiling {
@@ -365,9 +631,9 @@ button {
 .window-frame {
   position: absolute;
   top: 28px;
-  left: 28px;
-  width: 196px;
-  height: 132px;
+  left: 40%;
+  width: 168px;
+  height: 118px;
   background: #7a4a2e;
   border: 4px solid #3a2723;
   border-radius: 8px;
@@ -565,10 +831,10 @@ button {
 
 .poster {
   position: absolute;
-  top: 36px;
-  right: 36px;
-  width: 84px;
-  height: 104px;
+  top: 32px;
+  right: 7%;
+  width: 78px;
+  height: 96px;
   background: #fff6e6;
   border: 4px solid #5c3d2e;
   border-radius: 6px;
@@ -589,7 +855,7 @@ button {
 
 .lamp {
   position: absolute;
-  left: 68%;
+  left: 74%;
   bottom: 16%;
   width: 56px;
   height: 120px;
@@ -639,9 +905,9 @@ button {
 .curtains {
   position: absolute;
   top: 22px;
-  left: 20px;
-  width: 212px;
-  height: 152px;
+  left: calc(40% - 12px);
+  width: 192px;
+  height: 138px;
   z-index: 4;
   pointer-events: none;
 }
@@ -675,7 +941,7 @@ button {
 
 .cushion {
   position: absolute;
-  left: 38%;
+  left: 51%;
   bottom: 16%;
   width: 86px;
   height: 46px;
@@ -700,11 +966,11 @@ button {
 
 .fountain {
   position: absolute;
-  left: 22%;
+  left: 18%;
   bottom: 16%;
   width: 72px;
   height: 70px;
-  z-index: 4;
+  z-index: 5;
 }
 
 .water-bowl {
@@ -733,7 +999,7 @@ button {
 
 .floor-plant {
   position: absolute;
-  left: 4%;
+  left: 37%;
   bottom: 16%;
   width: 72px;
   height: 108px;
@@ -799,10 +1065,10 @@ button {
 
 .rug {
   position: absolute;
-  left: 50%;
+  left: 56%;
   bottom: 14%;
-  width: 268px;
-  height: 108px;
+  width: 248px;
+  height: 100px;
   transform: translateX(-50%);
   background:
     radial-gradient(ellipse at center, #f0cfc8 0 18%, #e8b8b0 18% 34%, #c45e32 34% 52%, #9a3f24 52% 62%, #c45e32 62% 78%, #7a2e1c 78% 100%);
@@ -816,7 +1082,7 @@ button {
 
 .bed {
   position: absolute;
-  right: 18px;
+  right: 2%;
   bottom: 15%;
   width: 188px;
   height: 92px;
@@ -896,7 +1162,7 @@ button {
 
 .bowl {
   position: absolute;
-  left: 14%;
+  left: 10%;
   bottom: 16%;
   width: 58px;
   height: 30px;
@@ -910,7 +1176,7 @@ button {
 
 .ball {
   position: absolute;
-  left: 46%;
+  left: 53%;
   bottom: 17%;
   width: 34px;
   height: 34px;
@@ -923,7 +1189,7 @@ button {
 
 .toybox {
   position: absolute;
-  left: 58%;
+  left: 63%;
   bottom: 16%;
   width: 68px;
   height: 50px;
@@ -1861,5 +2127,63 @@ button {
 
   .device-top h1 {
     font-size: 22px;
+  }
+
+  .kitchen-tiles,
+  .kitchen-floor {
+    width: 40%;
+  }
+
+  .arch {
+    left: 40%;
+  }
+
+  .fridge {
+    width: 42px;
+    height: 112px;
+    left: 6px;
+  }
+
+  .upper-cabs,
+  .kitchen-set {
+    left: 50px;
+    width: calc(40% - 58px);
+  }
+
+  .upper-cabs {
+    top: 22px;
+    height: 32px;
+  }
+
+  .kitchen-set {
+    height: 70px;
+  }
+
+  .window-frame {
+    left: 45%;
+    width: 118px;
+    height: 86px;
+  }
+
+  .curtains {
+    left: calc(45% - 8px);
+    width: 134px;
+    height: 102px;
+  }
+
+  .wardrobe {
+    width: 54px;
+    height: 118px;
+    right: 24%;
+  }
+
+  .bed {
+    width: 132px;
+    height: 70px;
+  }
+
+  .rug {
+    width: 150px;
+    height: 64px;
   }
 }
