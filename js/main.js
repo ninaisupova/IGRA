@@ -188,9 +188,9 @@ const Game = {
       this.interact("pet");
       return;
     }
-    if (this.near(11, 12)) return this.interact("bowl");
-    if (this.near(88, 12)) return this.interact("bed");
-    if (this.near(55, 10)) return this.interact("toy");
+    if (this.near(ROOM_SPOTS.bowl, 9)) return this.interact("bowl");
+    if (this.near(ROOM_SPOTS.bed, 11)) return this.interact("bed");
+    if (this.near(ROOM_SPOTS.toy, 9)) return this.interact("toy");
   },
 
   interact(kind) {
@@ -273,7 +273,7 @@ const Game = {
       this.spark(GameState.data.pet.x, "★");
     }
     if (ev === "toy") {
-      GameState.data.pet.target = 63;
+      GameState.data.pet.target = ROOM_SPOTS.toy;
       GameState.data.pet.action = "search";
     }
   },

@@ -16,8 +16,9 @@ const World = {
   },
 
   rollWeather() {
-    this.weather = Math.random() < 0.18 ? "rain" : "clear";
-    this.weatherUntil = performance.now() + 40000 + Math.random() * 50000;
+    const roll = Math.random();
+    this.weather = roll < 0.55 ? "clear" : roll < 0.8 ? "rain" : "snow";
+    this.weatherUntil = performance.now() + 35000 + Math.random() * 45000;
   },
 
   maybeEvent(now) {

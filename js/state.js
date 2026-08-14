@@ -99,7 +99,8 @@ const GameState = {
   timeOfDay() {
     const h = this.hour();
     if (h >= 21 || h < 6) return "night";
-    if (h >= 18) return "dusk";
+    if (h >= 6 && h < 10) return "morning";
+    if (h >= 17) return "dusk";
     return "day";
   },
 };
