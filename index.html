@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#6B8F71" />
+  <title>Мой маленький друг</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=KoHo:wght@400;500;600;700&family=Sniglet:wght@400;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="app">
+    <div class="linen" aria-hidden="true"></div>
+
+    <div class="device" id="device">
+      <div class="device-shine" aria-hidden="true"></div>
+      <header class="device-top">
+        <p class="brand">карманный театр</p>
+        <h1>Мой маленький друг</h1>
+        <div class="top-tools">
+          <span class="clock" id="clock" aria-live="polite">утро</span>
+          <span class="stars" id="stars" title="Звёздочки">★ 0</span>
+          <button type="button" class="icon-btn" id="btn-sound" aria-label="Звук" title="Звук">♪</button>
+          <button type="button" class="icon-btn" id="btn-help" aria-label="Как играть" title="Как играть">?</button>
+        </div>
+      </header>
+
+      <div class="screen" id="screen" data-time="day">
+        <div class="sky" id="sky">
+          <div class="sun" id="sun"></div>
+          <div class="moon" id="moon"></div>
+          <div class="stars-sky" id="stars-sky"></div>
+          <div class="cloud c1"></div>
+          <div class="cloud c2"></div>
+        </div>
+
+        <div class="room" id="room">
+          <div class="wall" id="wall">
+            <div class="window-frame">
+              <div class="window-glass" id="window-glass">
+                <div class="rain" id="rain"></div>
+                <div class="bird" id="bird"></div>
+              </div>
+            </div>
+            <div class="poster" id="furn-poster" hidden></div>
+            <div class="shelf" id="furn-plant" hidden>
+              <div class="plant"></div>
+            </div>
+          </div>
+
+          <div class="lamp" id="furn-lamp" hidden></div>
+          <div class="curtains" id="furn-curtains" hidden></div>
+          <div class="rug" id="furn-rug" hidden></div>
+          <div class="cushion" id="furn-cushion" hidden></div>
+          <div class="toybox" id="furn-toys" hidden>
+            <span>🪀</span>
+          </div>
+          <div class="fountain" id="furn-fountain" hidden></div>
+
+          <div class="bed" id="bed" data-interact="bed" title="Кроватка">
+            <div class="pillow"></div>
+            <div class="blanket"></div>
+          </div>
+          <div class="bowl" id="bowl" data-interact="bowl" title="Мисочка">
+            <div class="bowl-food" id="bowl-food"></div>
+          </div>
+          <div class="ball" id="ball" data-interact="toy" title="Игрушка"></div>
+
+          <div class="floor"></div>
+          <div class="floor-shadow"></div>
+
+          <div class="egg" id="egg" data-interact="egg">
+            <div class="egg-shell"></div>
+            <div class="egg-shine"></div>
+            <div class="egg-cracks" id="egg-cracks"></div>
+            <div class="egg-warmth" id="egg-warmth"></div>
+            <div class="egg-hint" id="egg-hint">согрей меня</div>
+          </div>
+
+          <div class="actor pet" id="pet" hidden>
+            <div class="emotion" id="pet-emotion">♡</div>
+            <div class="pet-body" id="pet-body"></div>
+          </div>
+
+          <div class="actor caretaker" id="player" data-facing="1">
+            <div class="kid">
+              <div class="kid-hair"></div>
+              <div class="kid-head"></div>
+              <div class="kid-body"></div>
+              <div class="kid-legs"></div>
+            </div>
+          </div>
+
+          <div class="speech" id="speech" hidden></div>
+          <div class="event-layer" id="event-layer"></div>
+        </div>
+
+        <div class="vignette"></div>
+        <div class="grain"></div>
+      </div>
+
+      <div class="needs" id="needs" aria-label="Самочувствие питомца">
+        <button type="button" class="need" data-need="hunger" title="Голод">
+          <span class="need-icon">🍽</span>
+          <span class="need-fill" id="need-hunger"></span>
+        </button>
+        <button type="button" class="need" data-need="sleep" title="Сон">
+          <span class="need-icon">🌙</span>
+          <span class="need-fill" id="need-sleep"></span>
+        </button>
+        <button type="button" class="need" data-need="mood" title="Настроение">
+          <span class="need-icon">♥</span>
+          <span class="need-fill" id="need-mood"></span>
+        </button>
+        <button type="button" class="need" data-need="play" title="Игра">
+          <span class="need-icon">🪀</span>
+          <span class="need-fill" id="need-play"></span>
+        </button>
+        <button type="button" class="need" data-need="attention" title="Внимание">
+          <span class="need-icon">👋</span>
+          <span class="need-fill" id="need-attention"></span>
+        </button>
+      </div>
+
+      <nav class="care-bar" id="care-bar">
+        <button type="button" class="care-btn" id="btn-feed">Кормить</button>
+        <button type="button" class="care-btn" id="btn-play">Играть</button>
+        <button type="button" class="care-btn" id="btn-pet">Гладить</button>
+        <button type="button" class="care-btn" id="btn-sleep">Спать</button>
+        <button type="button" class="care-btn" id="btn-games">Мини-игры</button>
+        <button type="button" class="care-btn" id="btn-shop">Комната</button>
+      </nav>
+
+      <div class="touch-pad" id="touch-pad" hidden>
+        <div class="dpad">
+          <button type="button" class="pad-btn pad-left" data-dir="left" aria-label="Влево">◀</button>
+          <button type="button" class="pad-btn pad-jump" data-dir="jump" aria-label="Прыжок">▲</button>
+          <button type="button" class="pad-btn pad-right" data-dir="right" aria-label="Вправо">▶</button>
+        </div>
+        <button type="button" class="pad-action" id="pad-action" aria-label="Действие">●</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay" hidden></div>
+
+  <script src="js/animals.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/world.js"></script>
+  <script src="js/pet.js"></script>
+  <script src="js/minigames.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/input.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
