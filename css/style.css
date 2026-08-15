@@ -239,12 +239,18 @@ button {
 
 .stars-sky {
   position: absolute;
-  inset: 0;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 72%;
+  bottom: auto;
+  overflow: hidden;
   opacity: 0;
+  pointer-events: none;
   background-image:
     radial-gradient(circle, #fff 1px, transparent 1.6px),
     radial-gradient(circle, #ffe9a8 1px, transparent 1.6px);
-  background-position: 12% 20%, 70% 40%;
+  background-position: 12% 18%, 70% 32%;
   background-size: 80px 50px, 110px 70px;
   transition: opacity 0.8s;
 }
@@ -643,7 +649,7 @@ button {
   right: -8%;
   bottom: 0;
   height: 86%;
-  z-index: 1;
+  z-index: 3;
   background:
     linear-gradient(105deg, rgba(255, 236, 204, 0.2), transparent 38%),
     repeating-linear-gradient(
@@ -682,9 +688,20 @@ button {
 .room-photo .rain,
 .room-photo .snow,
 .room-photo .bird,
-.room-photo .stars-sky,
+.room-photo .stars-sky {
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 72%;
+  bottom: auto;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+}
+
 .room-photo .window-moon {
-  z-index: 2;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .window-moon {
@@ -726,7 +743,7 @@ button {
 
 .room-photo .rain,
 .room-photo .snow {
-  bottom: 26%;
+  height: 72%;
 }
 
 .screen[data-time="morning"] .room-photo-img {
@@ -2139,8 +2156,8 @@ button {
   z-index: 8;
 }
 
-.screen[data-time="night"] .vignette {
-  box-shadow: inset 0 0 90px rgba(4, 8, 6, 0.45);
+.screen[data-time="night"] .grain {
+  opacity: 0.035;
 }
 
 .grain {

@@ -117,7 +117,7 @@ const Game = {
     box.innerHTML = "";
     for (let i = 0; i < 18; i += 1) {
       const d = document.createElement("i");
-      d.style.cssText = `position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;left:${Math.random()*100}%;top:${Math.random()*70}%;opacity:${0.4+Math.random()*0.6}`;
+      d.style.cssText = `position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;left:${Math.random()*100}%;top:${8+Math.random()*48}%;opacity:${0.45+Math.random()*0.55}`;
       box.appendChild(d);
     }
   },
