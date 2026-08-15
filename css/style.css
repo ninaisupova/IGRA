@@ -1267,53 +1267,73 @@ button {
 
 .rug {
   position: absolute;
-  left: 78%;
-  bottom: 5%;
+  right: 2%;
+  left: auto;
+  bottom: 3%;
   width: 280px;
-  height: 86px;
-  transform: translateX(-50%) rotate(-6deg);
+  height: 120px;
+  transform: perspective(520px) rotateX(62deg);
+  transform-origin: center bottom;
   background: radial-gradient(ellipse at center, #c5dc6a 0 68%, #9cbc3a 100%);
   border-radius: 48% 52% 46% 54%;
   border: 0;
   z-index: 2;
-  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 10px 16px rgba(0, 0, 0, 0.2);
 }
 
 .bed {
   position: absolute;
-  right: 2.5%;
+  right: 3%;
   bottom: var(--ground);
   width: 270px;
-  height: 118px;
-  background: linear-gradient(#3d2e24, #2a211a);
+  height: 96px;
+  background: none;
   border: 0;
-  border-radius: 4px;
+  border-radius: 0;
   z-index: 3;
   cursor: pointer;
-  box-shadow: 0 12px 18px rgba(0, 0, 0, 0.28);
+  box-shadow: none;
+}
+
+.mattress {
+  position: absolute;
+  left: 40px;
+  right: 16px;
+  bottom: 4px;
+  height: 86%;
+  background:
+    linear-gradient(#4a382c, #2a211a);
+  border: 0;
+  border-radius: 10px;
+  transform: perspective(520px) rotateX(62deg);
+  transform-origin: center bottom;
+  box-shadow: 0 16px 22px rgba(0, 0, 0, 0.3);
 }
 
 .headboard {
   position: absolute;
   right: 10px;
-  top: -40px;
-  width: 78px;
-  height: 46px;
+  bottom: 18%;
+  width: 12px;
+  height: 78%;
   background: linear-gradient(#5a4030, #3d2c20);
   border: 0;
-  border-radius: 3px 3px 0 0;
+  border-radius: 3px 3px 2px 2px;
+  box-shadow: 3px 6px 10px rgba(0, 0, 0, 0.22);
+  z-index: 2;
 }
 
 .nightstand {
   position: absolute;
-  left: -42px;
-  bottom: 0;
-  width: 44px;
-  height: 52px;
+  left: 0;
+  bottom: 2px;
+  width: 38px;
+  height: 48px;
   background: #c4b49a;
   border: 0;
   border-radius: 2px;
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.16);
+  z-index: 3;
 }
 
 .orb-lamp {
@@ -1333,22 +1353,22 @@ button {
 
 .duvet {
   position: absolute;
-  left: 8px;
-  right: 16px;
-  top: 10px;
-  bottom: 8px;
+  left: 7%;
+  right: 8%;
+  top: 14%;
+  bottom: 12%;
   background:
     linear-gradient(160deg, #e8e4dc 0%, #c8c2b8 48%, #a8a29a 100%);
-  border-radius: 6px 14px 6px 6px;
+  border-radius: 8px;
   box-shadow: inset 0 -8px 0 rgba(0, 0, 0, 0.08);
 }
 
 .pillow {
   position: absolute;
-  right: 22px;
-  top: -6px;
-  width: 58px;
-  height: 26px;
+  right: 10%;
+  top: 22%;
+  width: 26%;
+  height: 34%;
   background: #f2eee6;
   border: 0;
   border-radius: 12px;
@@ -2292,21 +2312,21 @@ button {
 /* Room geometry: every floor object shares one responsive baseline. */
 .room-stage {
   --floor-y: clamp(5px, 1.5%, 10px);
+  --window-y: 21%;
+  --kitchen-scale: 0.72;
   --layer-rug: 1;
+  --layer-far: 2;
   --layer-furniture: 3;
   --layer-floor-object: 5;
   --layer-actor: 7;
   --layer-effect: 9;
 }
 
-.fridge,
-.kitchen-set,
 .lamp,
 .cushion,
 .fountain,
 .scene-plant,
 .floor-plant,
-.bed,
 .bowl,
 .ball,
 .toybox,
@@ -2315,40 +2335,53 @@ button {
   bottom: var(--floor-y);
 }
 
+.fridge,
+.kitchen-set {
+  left: auto;
+  bottom: var(--window-y);
+  transform: scale(var(--kitchen-scale));
+  transform-origin: bottom center;
+  z-index: var(--layer-far);
+}
+
 .fridge {
-  left: 1.5%;
-  width: clamp(58px, 7.5vw, 86px);
-  height: clamp(180px, 46%, 258px);
-  z-index: var(--layer-furniture);
+  left: 3.5%;
+  width: clamp(52px, 6.6vw, 74px);
+  height: clamp(150px, 38%, 210px);
 }
 
 .kitchen-set {
-  left: clamp(72px, 10vw, 112px);
-  width: clamp(180px, 24vw, 330px);
-  height: clamp(116px, 29%, 164px);
-  z-index: var(--layer-furniture);
+  left: clamp(62px, 9vw, 96px);
+  width: clamp(168px, 22vw, 290px);
+  height: clamp(96px, 24%, 132px);
 }
 
 .upper-cabs {
-  left: clamp(72px, 10vw, 112px);
-  bottom: calc(var(--floor-y) + clamp(128px, 32%, 178px));
-  width: clamp(180px, 24vw, 330px);
-  height: clamp(30px, 8%, 44px);
-  z-index: var(--layer-furniture);
+  left: clamp(62px, 9vw, 96px);
+  bottom: calc(var(--window-y) + clamp(88px, 22%, 122px));
+  width: clamp(168px, 22vw, 290px);
+  height: clamp(26px, 7%, 38px);
+  transform: scale(var(--kitchen-scale));
+  transform-origin: bottom center;
+  z-index: var(--layer-far);
 }
 
 .rug {
-  left: 82%;
-  bottom: max(6px, calc(var(--floor-y) - 10px));
-  width: clamp(170px, 27vw, 300px);
-  height: clamp(54px, 14%, 94px);
+  right: 1.5%;
+  left: auto;
+  bottom: max(4px, calc(var(--floor-y) - 2px));
+  width: clamp(210px, 32vw, 360px);
+  height: clamp(72px, 18%, 118px);
+  transform: perspective(520px) rotateX(62deg);
+  transform-origin: center bottom;
   z-index: var(--layer-rug);
 }
 
 .bed {
-  right: 2.5%;
-  width: clamp(190px, 26vw, 285px);
-  height: clamp(88px, 23%, 124px);
+  right: 2%;
+  bottom: calc(var(--floor-y) + 4px);
+  width: clamp(230px, 32vw, 360px);
+  height: clamp(62px, 16%, 92px);
   z-index: var(--layer-furniture);
 }
 
@@ -2428,7 +2461,7 @@ button {
 }
 
 .pet.sleep {
-  bottom: calc(var(--floor-y) + clamp(30px, 8%, 46px));
+  bottom: calc(var(--floor-y) + 10px);
   z-index: calc(var(--layer-furniture) + 1);
 }
 
