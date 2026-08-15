@@ -2152,6 +2152,69 @@ button {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 
+.face-zoom {
+  position: absolute;
+  inset: 0;
+  z-index: 18;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  background: rgba(18, 12, 8, 0.22);
+}
+
+.face-zoom-frame {
+  width: min(58%, 250px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 28%, #fffdf6, #f3e6c8 62%, #e4d2a8);
+  border: 7px solid #3a2723;
+  box-shadow:
+    0 16px 28px rgba(0, 0, 0, 0.38),
+    inset 0 0 0 4px #fff6e6;
+  overflow: hidden;
+  transform: scale(0.4);
+  opacity: 0;
+}
+
+.face-zoom.on .face-zoom-frame {
+  animation: face-zoom-in 0.38s cubic-bezier(0.2, 0.9, 0.3, 1.15) forwards;
+}
+
+.face-zoom.out .face-zoom-frame {
+  animation: face-zoom-out 0.36s ease forwards;
+}
+
+.face-zoom-frame[data-mood="happy"] {
+  box-shadow:
+    0 16px 28px rgba(0, 0, 0, 0.38),
+    inset 0 0 0 4px #fff6e6,
+    0 0 28px rgba(240, 193, 74, 0.35);
+}
+
+.face-zoom-frame[data-mood="sad"] {
+  box-shadow:
+    0 16px 28px rgba(0, 0, 0, 0.38),
+    inset 0 0 0 4px #fff6e6,
+    0 0 24px rgba(110, 150, 190, 0.28);
+}
+
+.face-zoom-svg,
+.face-zoom-svg svg {
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes face-zoom-in {
+  0% { transform: scale(0.42); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes face-zoom-out {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(0.46); opacity: 0; }
+}
+
 .hud {
   width: min(420px, calc(100% - 16px));
   margin: 0 auto;

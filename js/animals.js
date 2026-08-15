@@ -285,6 +285,95 @@ function animalSvg(id) {
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 96" aria-hidden="true">${arms[id] ?? arms.default}${bodies[id] || bodies.fox}</svg>`;
 }
 
+function animalFaceSvg(id, mood) {
+  const a = ANIMALS[id] || ANIMALS.fox;
+  const c = a.colors;
+  const ink = c.ink;
+  const happy = mood !== "sad";
+
+  const extras = {
+    panda: `
+      <circle cx="18" cy="16" r="12" fill="#2A2420" stroke="${ink}" stroke-width="2"/>
+      <circle cx="62" cy="16" r="12" fill="#2A2420" stroke="${ink}" stroke-width="2"/>
+      <circle cx="40" cy="42" r="28" fill="#fff" stroke="${ink}" stroke-width="2.6"/>
+      <ellipse cx="28" cy="40" rx="10" ry="9" fill="#2A2420"/>
+      <ellipse cx="52" cy="40" rx="10" ry="9" fill="#2A2420"/>`,
+    penguin: `
+      <circle cx="40" cy="42" r="28" fill="${c.body}" stroke="${ink}" stroke-width="2.6"/>
+      <ellipse cx="40" cy="48" rx="18" ry="16" fill="${c.belly}"/>
+      <polygon points="36,48 40,58 44,48" fill="${c.ear}"/>`,
+    fox: `
+      <polygon points="12,28 18,4 32,22" fill="${c.ear}" stroke="${ink}" stroke-width="2.2"/>
+      <polygon points="48,22 62,4 68,28" fill="${c.ear}" stroke="${ink}" stroke-width="2.2"/>
+      <polygon points="16,22 20,10 28,22" fill="${c.belly}"/>
+      <polygon points="52,22 60,10 64,22" fill="${c.belly}"/>
+      <circle cx="40" cy="44" r="26" fill="${c.body}" stroke="${ink}" stroke-width="2.6"/>`,
+    frog: `
+      <circle cx="22" cy="24" r="14" fill="${c.body}" stroke="${ink}" stroke-width="2.2"/>
+      <circle cx="58" cy="24" r="14" fill="${c.body}" stroke="${ink}" stroke-width="2.2"/>
+      <circle cx="40" cy="46" r="26" fill="${c.body}" stroke="${ink}" stroke-width="2.6"/>
+      <ellipse cx="40" cy="52" rx="14" ry="10" fill="${c.belly}"/>`,
+    koala: `
+      <circle cx="14" cy="22" r="16" fill="${c.ear}" stroke="${ink}" stroke-width="2.2"/>
+      <circle cx="66" cy="22" r="16" fill="${c.ear}" stroke="${ink}" stroke-width="2.2"/>
+      <circle cx="14" cy="22" r="8" fill="${c.belly}"/>
+      <circle cx="66" cy="22" r="8" fill="${c.belly}"/>
+      <circle cx="40" cy="44" r="26" fill="${c.body}" stroke="${ink}" stroke-width="2.6"/>
+      <ellipse cx="40" cy="52" rx="8" ry="6" fill="#E8B4C4"/>`,
+    raccoon: `
+      <circle cx="16" cy="18" r="10" fill="${c.ear}" stroke="${ink}" stroke-width="2"/>
+      <circle cx="64" cy="18" r="10" fill="${c.ear}" stroke="${ink}" stroke-width="2"/>
+      <circle cx="40" cy="44" r="26" fill="${c.body}" stroke="${ink}" stroke-width="2.6"/>
+      <path d="M18 38 h44 v14 q-22 10 -44 0 z" fill="#2A2420"/>`,
+    hedgehog: `
+      <path d="M12 36 l8 -18 l10 12 l10 -20 l10 20 l10 -12 l8 18" fill="#5C4632" stroke="${ink}" stroke-width="2"/>
+      <circle cx="40" cy="46" r="24" fill="${c.body}" stroke="${ink}" stroke-width="2.6"/>
+      <ellipse cx="32" cy="52" rx="10" ry="8" fill="${c.belly}"/>`,
+    otter: `
+      <circle cx="18" cy="20" r="8" fill="${c.ear}" stroke="${ink}" stroke-width="2"/>
+      <circle cx="62" cy="20" r="8" fill="${c.ear}" stroke="${ink}" stroke-width="2"/>
+      <circle cx="40" cy="44" r="26" fill="${c.body}" stroke="${ink}" stroke-width="2.6"/>
+      <ellipse cx="40" cy="52" rx="12" ry="9" fill="${c.belly}"/>`,
+    flamingo: `
+      <circle cx="40" cy="44" r="26" fill="${c.body}" stroke="${ink}" stroke-width="2.6"/>
+      <path d="M22 46 q-16 4 -12 12 q14 0 18 -8" fill="#E07A3D" stroke="${ink}" stroke-width="1.6"/>`,
+    alpaca: `
+      <circle cx="18" cy="16" r="9" fill="${c.ear}" stroke="${ink}" stroke-width="2"/>
+      <circle cx="62" cy="16" r="9" fill="${c.ear}" stroke="${ink}" stroke-width="2"/>
+      <circle cx="40" cy="44" r="26" fill="${c.body}" stroke="${ink}" stroke-width="2.6"/>
+      <ellipse cx="40" cy="50" rx="8" ry="6" fill="#E8B4C4"/>`,
+    squirrel: `
+      <polygon points="14,28 16,6 32,24" fill="${c.ear}" stroke="${ink}" stroke-width="2.2"/>
+      <polygon points="48,24 64,6 66,28" fill="${c.ear}" stroke="${ink}" stroke-width="2.2"/>
+      <circle cx="40" cy="44" r="26" fill="${c.body}" stroke="${ink}" stroke-width="2.6"/>
+      <ellipse cx="40" cy="52" rx="11" ry="8" fill="${c.belly}"/>`,
+  };
+
+  const eyes = happy ? `
+    <path d="M22 40 q8 -7 16 0" fill="none" stroke="${ink}" stroke-width="3" stroke-linecap="round"/>
+    <path d="M42 40 q8 -7 16 0" fill="none" stroke="${ink}" stroke-width="3" stroke-linecap="round"/>`
+    : `
+    <ellipse cx="30" cy="41" rx="5.5" ry="6.5" fill="${ink}"/>
+    <ellipse cx="50" cy="41" rx="5.5" ry="6.5" fill="${ink}"/>
+    <circle cx="32" cy="39" r="1.8" fill="#fff"/>
+    <circle cx="52" cy="39" r="1.8" fill="#fff"/>
+    <path d="M24 34 q6 5 12 0" fill="none" stroke="${ink}" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M44 34 q6 5 12 0" fill="none" stroke="${ink}" stroke-width="2.2" stroke-linecap="round"/>`;
+
+  const mouth = happy ? `
+    <path d="M32 54 q8 11 16 0" fill="none" stroke="${ink}" stroke-width="2.8" stroke-linecap="round"/>`
+    : `
+    <path d="M34 58 q6 -7 12 0" fill="none" stroke="${ink}" stroke-width="2.6" stroke-linecap="round"/>
+    <ellipse cx="58" cy="52" rx="3.2" ry="5" fill="#7EC8E3" opacity="0.9"/>
+    <ellipse cx="58" cy="62" rx="2.2" ry="3.2" fill="#7EC8E3" opacity="0.7"/>`;
+
+  const blush = `
+    <ellipse cx="20" cy="50" rx="6" ry="3.4" fill="#E8A8B4" opacity="${happy ? 0.75 : 0.35}"/>
+    <ellipse cx="60" cy="50" rx="6" ry="3.4" fill="#E8A8B4" opacity="${happy ? 0.75 : 0.35}"/>`;
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" aria-hidden="true">${extras[id] || extras.fox}${blush}${eyes}${mouth}</svg>`;
+}
+
 function pickHatchAnimal(egg) {
   const scores = {};
   ANIMAL_IDS.forEach((id) => { scores[id] = 1; });

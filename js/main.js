@@ -2,6 +2,8 @@ const Game = {
   last: 0,
   hatchLock: false,
   audio: null,
+  faceZoomUntil: 0,
+  lastZoomMood: "",
 
   boot() {
     GameState.load();
@@ -314,11 +316,50 @@ const Game = {
       pet.className = "actor pet " + s.pet.action + " " + age + (Date.now() < s.babyUntil ? " baby" : "");
       document.getElementById("pet-body").dataset.facing = String(s.pet.facing);
       document.getElementById("pet-emotion").textContent = PetAI.emotionFor(s.pet.emotion);
+      this.maybeFaceZoom(s.pet.emotion, s.pet.action);
       if (s.pet.action === "sleep" && Math.random() < 0.004) this.spark(s.pet.x + 6, "z");
     }
     if (performance.now() < PetAI.speakUntil) UI.speak(PetAI.lastLine);
     else UI.speak("");
     UI.renderNeeds();
+  },
+
+  maybeFaceZoom(emotion, action) {
+    if (action === "sleep") return;
+    const mood = emotion === "sad" ? "sad"
+      : (emotion === "happy" || emotion === "love" || emotion === "playful") ? "happy"
+      : null;
+    if (!mood) {
+      this.lastZoomMood = emotion || "";
+      return;
+    }
+    if (mood === this.lastZoomMood) return;
+    if (performance.now() < this.faceZoomUntil) return;
+    this.lastZoomMood = mood;
+    this.showFaceZoom(mood);
+  },
+
+  showFaceZoom(mood) {
+    const s = GameState.data;
+    const box = document.getElementById("face-zoom");
+    const svg = document.getElementById("face-zoom-svg");
+    const frame = box.querySelector(".face-zoom-frame");
+    if (!box || !svg || !s.animalId) return;
+    svg.innerHTML = animalFaceSvg(s.animalId, mood);
+    frame.dataset.mood = mood;
+    box.hidden = false;
+    box.classList.remove("out");
+    void box.offsetWidth;
+    box.classList.add("on");
+    this.faceZoomUntil = performance.now() + 2400;
+    clearTimeout(this.faceZoomHide);
+    this.faceZoomHide = setTimeout(() => {
+      box.classList.add("out");
+      setTimeout(() => {
+        box.hidden = true;
+        box.classList.remove("on", "out");
+      }, 380);
+    }, 1650);
   },
 
   sfx(kind) {
