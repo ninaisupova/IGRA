@@ -560,29 +560,30 @@ button {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 75%;
+  height: 28%;
   z-index: 1;
   background:
-    linear-gradient(105deg, rgba(255, 255, 255, 0.16), transparent 35%),
-    repeating-linear-gradient(
-      0deg,
-      rgba(20, 13, 9, 0.7) 0 2px,
-      transparent 2px 58px
+    linear-gradient(105deg, rgba(255, 236, 204, 0.18), transparent 32%),
+    linear-gradient(
+      to bottom,
+      transparent 0 13%,
+      rgba(28, 17, 11, 0.7) 13.5% 14.5%,
+      transparent 15% 34%,
+      rgba(28, 17, 11, 0.72) 34.5% 36%,
+      transparent 36.5% 61%,
+      rgba(28, 17, 11, 0.78) 61.5% 63.5%,
+      transparent 64%
     ),
-    repeating-linear-gradient(
-      90deg,
-      #3b291d 0 88px,
-      #211710 88px 91px,
-      #493224 91px 179px,
-      #281b13 179px 182px
-    ),
-    linear-gradient(180deg, #5a4230, #2b1d14);
-  transform: perspective(520px) rotateX(58deg);
-  transform-origin: bottom center;
-  backface-visibility: hidden;
+    repeating-conic-gradient(
+      from 72deg at 50% -65%,
+      #352319 0deg 7deg,
+      #4a3223 7deg 14deg,
+      #3c291d 14deg 21deg
+    );
+  border-top: 4px solid #271912;
   box-shadow:
-    inset 0 18px 28px rgba(0, 0, 0, 0.24),
-    inset 0 2px 0 rgba(255, 255, 255, 0.14);
+    inset 0 12px 20px rgba(0, 0, 0, 0.3),
+    inset 0 2px 0 rgba(255, 255, 255, 0.13);
 }
 
 .room-photo-img {
@@ -590,7 +591,7 @@ button {
   left: 0;
   top: 0;
   width: 100%;
-  height: 76%;
+  height: 74%;
   object-fit: cover;
   object-position: center;
   z-index: 0;
@@ -607,7 +608,7 @@ button {
 
 .room-photo .rain,
 .room-photo .snow {
-  bottom: 24%;
+  bottom: 26%;
 }
 
 .screen[data-time="morning"] .room-photo-img {
