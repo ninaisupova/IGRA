@@ -292,9 +292,11 @@ const Game = {
   render() {
     const s = GameState.data;
     const screen = document.getElementById("screen");
-    screen.dataset.time = GameState.timeOfDay();
+    const sleeping = s.phase === "living" && s.pet.action === "sleep";
+    screen.dataset.time = sleeping ? "night" : GameState.timeOfDay();
+    screen.dataset.season = GameState.season();
     screen.dataset.weather = World.weather;
-    document.getElementById("clock").textContent = World.clockLabel();
+    document.getElementById("clock").textContent = sleeping ? "ночь" : World.clockLabel();
     document.getElementById("stars").textContent = "★ " + s.stars;
 
     const player = document.getElementById("player");

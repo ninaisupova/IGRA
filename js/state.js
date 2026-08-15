@@ -15,6 +15,7 @@ function defaultState() {
     createdAt: Date.now(),
     lastTick: Date.now(),
     gameMinutes: 8 * 60,
+    gameDays: 0,
     stars: 0,
     hatch: 0,
     egg: { pets: 0, jumps: 0, nightTime: 0, warmth: 0 },
@@ -102,5 +103,10 @@ const GameState = {
     if (h >= 6 && h < 10) return "morning";
     if (h >= 17) return "dusk";
     return "day";
+  },
+
+  season() {
+    const day = this.data.gameDays || 0;
+    return ["summer", "autumn", "winter", "spring"][Math.floor(day / 4) % 4];
   },
 };

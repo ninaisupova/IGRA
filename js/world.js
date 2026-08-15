@@ -6,18 +6,31 @@ const World = {
   advance(dt) {
     const s = GameState.data;
     s.gameMinutes += dt * 0.055;
-    if (s.gameMinutes >= 24 * 60) s.gameMinutes -= 24 * 60;
+    if (s.gameMinutes >= 24 * 60) {
+      s.gameMinutes -= 24 * 60;
+      s.gameDays = (s.gameDays || 0) + 1;
+    }
     if (s.phase === "egg" && GameState.timeOfDay() === "night") {
       s.egg.nightTime += dt * 0.02;
     }
     if (performance.now() > this.weatherUntil) {
       this.rollWeather();
     }
+    if (this.weather === "snow" && GameState.season() !== "winter") {
+      this.weather = "rain";
+    }
   },
 
   rollWeather() {
     const roll = Math.random();
-    this.weather = roll < 0.55 ? "clear" : roll < 0.8 ? "rain" : "snow";
+    const season = GameState.season();
+    if (season === "winter") {
+      this.weather = roll < 0.4 ? "clear" : roll < 0.7 ? "snow" : "rain";
+    } else if (season === "summer") {
+      this.weather = roll < 0.62 ? "clear" : "rain";
+    } else {
+      this.weather = roll < 0.55 ? "clear" : "rain";
+    }
     this.weatherUntil = performance.now() + 35000 + Math.random() * 45000;
   },
 

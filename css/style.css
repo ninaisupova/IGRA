@@ -682,8 +682,46 @@ button {
 .room-photo .rain,
 .room-photo .snow,
 .room-photo .bird,
-.room-photo .stars-sky {
+.room-photo .stars-sky,
+.room-photo .window-moon {
   z-index: 2;
+}
+
+.window-moon {
+  position: absolute;
+  top: 10%;
+  right: 16%;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 30%, #fffdf4, #e8e0c4 52%, #c8c09a);
+  box-shadow:
+    0 0 22px rgba(247, 241, 212, 0.6),
+    0 0 48px rgba(180, 200, 255, 0.28);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.9s ease;
+}
+
+.window-moon::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(40, 48, 70, 0.18);
+}
+
+.screen[data-time="night"] .window-moon {
+  opacity: 1;
+}
+
+.screen[data-season="summer"] .snow,
+.screen[data-season="spring"] .snow,
+.screen[data-season="autumn"] .snow {
+  opacity: 0 !important;
 }
 
 .room-photo .rain,
@@ -1548,18 +1586,18 @@ button {
 
 .pillow {
   position: absolute;
-  right: 18%;
-  top: -32px;
-  width: 34%;
-  height: 22px;
+  right: 10%;
+  top: -38px;
+  width: 30%;
+  height: 18px;
   background: radial-gradient(ellipse at 35% 35%, #fffdf8, #e8e0d4 55%, #c8c2b8);
   border: 0;
   border-radius: 16px;
   box-shadow:
     4px 6px 6px rgba(0, 0, 0, 0.18),
     inset -4px -4px 6px rgba(0, 0, 0, 0.12);
-  transform: skewX(-18deg);
-  z-index: 4;
+  transform: skewX(-22deg);
+  z-index: 6;
 }
 
 .bowl {
@@ -2558,22 +2596,24 @@ button {
 }
 
 .rug {
-  right: 1.5%;
+  right: 2%;
   left: auto;
-  bottom: max(4px, calc(var(--floor-y) - 2px));
-  width: clamp(210px, 32vw, 360px);
-  height: clamp(72px, 18%, 118px);
-  transform: perspective(520px) rotateX(62deg);
+  bottom: calc(var(--window-y) - 3%);
+  width: clamp(180px, 28vw, 300px);
+  height: clamp(58px, 14%, 96px);
+  transform: perspective(520px) rotateX(62deg) scale(0.82);
   transform-origin: center bottom;
   z-index: var(--layer-rug);
 }
 
 .bed {
-  right: 2%;
-  bottom: calc(var(--floor-y) + 4px);
-  width: clamp(250px, 34vw, 390px);
-  height: clamp(78px, 22%, 118px);
-  z-index: var(--layer-furniture);
+  right: 3%;
+  bottom: var(--window-y);
+  width: clamp(220px, 30vw, 340px);
+  height: clamp(70px, 18%, 102px);
+  transform: scale(0.8);
+  transform-origin: bottom center;
+  z-index: var(--layer-far);
 }
 
 .lamp {
@@ -2603,9 +2643,14 @@ button {
 }
 
 .floor-plant {
-  left: 45%;
-  width: clamp(58px, 8vw, 82px);
-  height: clamp(110px, 32%, 160px);
+  left: auto;
+  right: 32%;
+  bottom: var(--window-y);
+  width: clamp(52px, 7vw, 74px);
+  height: clamp(96px, 26%, 140px);
+  transform: scale(0.78);
+  transform-origin: bottom center;
+  z-index: var(--layer-far);
 }
 
 .bowl {
@@ -2623,10 +2668,13 @@ button {
 }
 
 .cushion {
-  left: 51%;
-  width: clamp(68px, 8.5vw, 92px);
-  height: clamp(30px, 8%, 40px);
-  z-index: var(--layer-floor-object);
+  right: 9%;
+  left: auto;
+  bottom: calc(var(--window-y) + 34px);
+  width: clamp(52px, 7vw, 72px);
+  height: clamp(22px, 6%, 30px);
+  transform: skewX(-22deg);
+  z-index: calc(var(--layer-far) + 2);
 }
 
 .ball {
@@ -2652,8 +2700,8 @@ button {
 }
 
 .pet.sleep {
-  bottom: calc(var(--floor-y) + 26px);
-  z-index: calc(var(--layer-furniture) + 1);
+  bottom: calc(var(--window-y) + 20px);
+  z-index: calc(var(--layer-far) + 2);
 }
 
 .event-layer,
