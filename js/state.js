@@ -23,6 +23,7 @@ function defaultState() {
     personality: { care: 50, playfulness: 50, calm: 50, independence: 50, affection: 50 },
     furniture: [],
     babyUntil: 0,
+    hatchedAt: 0,
     pet: {
       x: 58,
       facing: -1,
@@ -108,5 +109,26 @@ const GameState = {
   season() {
     const day = this.data.gameDays || 0;
     return ["summer", "autumn", "winter", "spring"][Math.floor(day / 4) % 4];
+  },
+
+  petScale() {
+    const s = this.data;
+    if (s.phase !== "living") return 1;
+    if (!s.hatchedAt && s.babyUntil) {
+      s.hatchedAt = s.babyUntil - 1000 * 60 * 12;
+    }
+    if (!s.hatchedAt) return 1;
+    const ageMin = Math.max(0, (Date.now() - s.hatchedAt) / 60000);
+    const t = clamp(ageMin / 50, 0, 1);
+    const eased = 1 - Math.pow(1 - t, 1.35);
+    return 0.42 + 0.58 * eased;
+  },
+
+  petAgeClass() {
+    const scale = this.petScale();
+    if (scale < 0.58) return "hatchling";
+    if (scale < 0.78) return "baby";
+    if (scale < 0.96) return "young";
+    return "adult";
   },
 };

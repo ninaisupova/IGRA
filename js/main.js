@@ -83,6 +83,8 @@ const Game = {
     if (living) {
       this.renderPetBody();
       pet.style.left = (s.pet.x || 52) + "%";
+      pet.style.transform = `translateX(-50%) scale(${GameState.petScale()})`;
+      pet.style.transformOrigin = "50% 100%";
       pet.hidden = false;
     }
     this.updateEggLook();
@@ -93,7 +95,7 @@ const Game = {
     const animal = ANIMALS[s.animalId] || ANIMALS.fox;
     const body = document.getElementById("pet-body");
     body.innerHTML = animalSvg(animal.id) + `<span class="pet-emoji">${animal.emoji}</span>`;
-    document.getElementById("pet").classList.toggle("baby", Date.now() < s.babyUntil);
+    document.getElementById("pet").classList.toggle("baby", GameState.petAgeClass() !== "adult");
     const tag = document.getElementById("pet-label");
     if (tag) {
       tag.hidden = false;
@@ -243,7 +245,8 @@ const Game = {
     const s = GameState.data;
     s.animalId = pickHatchAnimal(s.egg);
     s.phase = "living";
-    s.babyUntil = Date.now() + 1000 * 60 * 12;
+    s.hatchedAt = Date.now();
+    s.babyUntil = Date.now() + 1000 * 60 * 50;
     s.pet.x = 52;
     s.pet.target = 52;
     s.pet.action = "happy";
@@ -305,8 +308,10 @@ const Game = {
     const pet = document.getElementById("pet");
     if (s.phase === "living") {
       pet.style.left = s.pet.x + "%";
-      pet.style.transform = "translateX(-50%)";
-      pet.className = "actor pet " + s.pet.action + (Date.now() < s.babyUntil ? " baby" : "");
+      const age = GameState.petAgeClass();
+      pet.style.transform = `translateX(-50%) scale(${GameState.petScale()})`;
+      pet.style.transformOrigin = "50% 100%";
+      pet.className = "actor pet " + s.pet.action + " " + age + (Date.now() < s.babyUntil ? " baby" : "");
       document.getElementById("pet-body").dataset.facing = String(s.pet.facing);
       document.getElementById("pet-emotion").textContent = PetAI.emotionFor(s.pet.emotion);
       if (s.pet.action === "sleep" && Math.random() < 0.004) this.spark(s.pet.x + 6, "z");

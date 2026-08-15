@@ -1919,6 +1919,17 @@ button {
   z-index: 7;
   cursor: pointer;
   overflow: visible;
+  transform-origin: 50% 100%;
+}
+
+.pet.hatchling {
+  width: 118px;
+}
+
+.pet.baby .pet-body,
+.pet.hatchling .pet-body,
+.pet.young .pet-body {
+  transform-origin: bottom center;
 }
 
 .pet::after {
@@ -1937,11 +1948,6 @@ button {
 
 .pet.walk::after {
   animation: shadow-step 0.38s ease-in-out infinite;
-}
-
-.pet.baby .pet-body {
-  transform: scale(0.9);
-  transform-origin: bottom center;
 }
 
 .pet-body {
@@ -2017,8 +2023,9 @@ button {
   transform: rotate(90deg) translate(10px, 8px);
 }
 
-.pet.sleep.baby .pet-body {
-  transform: rotate(90deg) translate(10px, 8px) scale(0.86);
+.pet.sleep.baby .pet-body,
+.pet.sleep.hatchling .pet-body {
+  transform: rotate(90deg) translate(10px, 8px);
 }
 
 .pet.sleep .emotion {
